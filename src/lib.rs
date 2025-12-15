@@ -514,11 +514,14 @@ impl Reflection {
                     descriptor_info.name = name.to_owned();
                 }
 
-                let inserted = current_set.insert(binding, descriptor_info);
-                assert!(
-                    inserted.is_none(),
-                    "Can't bind to the same slot twice within the same shader"
-                );
+                let ty = descriptor_info.ty;
+                let binding_count = descriptor_info.binding_count.clone();
+                if let Some(existed) = current_set.insert(binding, descriptor_info) {
+                    assert!(
+                        existed.ty == ty && existed.binding_count == binding_count,
+                        "Same slot is bound with completely different descriptors"
+                    );
+                }
             }
         }
         Ok(unique_sets)
