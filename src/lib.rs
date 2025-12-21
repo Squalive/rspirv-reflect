@@ -514,18 +514,15 @@ impl Reflection {
                     descriptor_info.name = name.to_owned();
                 }
 
-                let ty = descriptor_info.ty;
-                let binding_count = descriptor_info.binding_count.clone();
-                if let Some(existed) = current_set.insert(binding, descriptor_info) {
+                if let Some(existed) = current_set.get(&binding) {
                     assert!(
-                        existed.ty == ty && existed.binding_count == binding_count,
-                        "Set({set}) Same slot({binding}) is bound with completely different descriptors. Existed: {:?} ({:?}), New: {:?} ({:?})",
-                        existed.ty,
-                        existed.binding_count,
-                        ty,
-                        binding_count
+                        existed.ty == descriptor_info.ty && existed.binding_count == descriptor_info.binding_count,
+                        "Set({set}) Same slot({binding}) is bound with completely different descriptors. \nExisted: {:#?}, New: {:#?}",
+                        existed,
+                        descriptor_info,
                     );
                 }
+                current_set.insert(binding, descriptor_info);
             }
         }
         Ok(unique_sets)
