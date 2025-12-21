@@ -519,7 +519,11 @@ impl Reflection {
                 if let Some(existed) = current_set.insert(binding, descriptor_info) {
                     assert!(
                         existed.ty == ty && existed.binding_count == binding_count,
-                        "Same slot is bound with completely different descriptors"
+                        "Same slot `{binding}` is bound with completely different descriptors. Existed: {:?} ({:?}), New: {:?} ({:?})",
+                        existed.ty,
+                        existed.binding_count,
+                        ty,
+                        binding_count
                     );
                 }
             }
