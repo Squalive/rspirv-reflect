@@ -517,7 +517,7 @@ impl Reflection {
                 if let Some(existed) = current_set.get(&binding) {
                     assert!(
                         existed.ty == descriptor_info.ty && existed.binding_count == descriptor_info.binding_count,
-                        "Set({set}) Same slot({binding}) is bound with completely different descriptors. \nExisted: {:#?}, New: {:#?}",
+                        "Set({set}) Same slot({binding}) is bound with completely different descriptors. \nExisted: {:#?}\n New: {:#?}",
                         existed,
                         descriptor_info,
                     );
