@@ -14,5 +14,5 @@ documentation = "https://docs.rs/rspirv-reflect"
 include = ["/src", "/LICENSE-APACHE", "/LICENSE-MIT"]
 
 [dependencies]
-rspirv = "0.12"
-thiserror = "1.0"
+rspirv = "0.13.0+sdk-1.4.341.0"
+thiserror = "2.0.18"
