@@ -53,7 +53,7 @@ pub enum ReflectError {
     BindingGlobalParameterBuffer,
     #[error("Only one push constant block can be defined per shader entry")]
     TooManyPushConstants,
-    #[error("SPIR-V parse error")]
+    #[error("SPIR-V parse error: {0}")]
     ParseError(#[from] rspirv::binary::ParseState),
     #[error("OpTypeInt cannot have width {0}")]
     UnexpectedIntWidth(u32),
